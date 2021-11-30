@@ -200,7 +200,7 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<version>1.3.160</version>
+			<version>2.0.202</version>
 		</dependency>
 		<!-- For MapMaker -->
 		<dependency>
@@ -541,22 +541,11 @@
 						</goals>
 						<configuration>
 							<tasks>
-								<scp
-									file="${project.build.directory}/${project.build.finalName}.${project.packaging}"
-									todir="${publish.username}@${publish.host}:/tmp/greenhouse.war"
-									keyfile="${publish.keyfile}" trust="true" />
-								<sshexec host="${publish.host}" username="${publish.username}"
-									command="${publish.serverPath}/bin/tcruntime-ctl.sh stop"
-									keyfile="${publish.keyfile}" trust="true" failonerror="false" />
-								<sshexec host="${publish.host}" username="${publish.username}"
-									command="rm -rf ${publish.serverPath}/webapps/*" keyfile="${publish.keyfile}"
-									trust="true" />
-								<sshexec host="${publish.host}" username="${publish.username}"
-									command="mv /tmp/greenhouse.war ${publish.serverPath}/webapps/ROOT.war"
-									keyfile="${publish.keyfile}" trust="true" />
-								<sshexec host="${publish.host}" username="${publish.username}"
-									command="${publish.serverPath}/bin/tcruntime-ctl.sh start"
-									keyfile="${publish.keyfile}" trust="true" />
+								<scp file="${project.build.directory}/${project.build.finalName}.${project.packaging}" todir="${publish.username}@${publish.host}:/tmp/greenhouse.war" keyfile="${publish.keyfile}" trust="true"/>
+								<sshexec host="${publish.host}" username="${publish.username}" command="${publish.serverPath}/bin/tcruntime-ctl.sh stop" keyfile="${publish.keyfile}" trust="true" failonerror="false"/>
+								<sshexec host="${publish.host}" username="${publish.username}" command="rm -rf ${publish.serverPath}/webapps/*" keyfile="${publish.keyfile}" trust="true"/>
+								<sshexec host="${publish.host}" username="${publish.username}" command="mv /tmp/greenhouse.war ${publish.serverPath}/webapps/ROOT.war" keyfile="${publish.keyfile}" trust="true"/>
+								<sshexec host="${publish.host}" username="${publish.username}" command="${publish.serverPath}/bin/tcruntime-ctl.sh start" keyfile="${publish.keyfile}" trust="true"/>
 							</tasks>
 						</configuration>
 					</execution>
@@ -610,7 +599,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<execute></execute>
+										<execute/>
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
