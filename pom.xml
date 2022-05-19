@@ -18,7 +18,7 @@
 		<java-version>1.6</java-version>
 		<org.springframework-version>3.1.2.RELEASE</org.springframework-version>
 		<org.springframework.test-mvc-version>1.0.0.M1</org.springframework.test-mvc-version>
-		<org.springframework.security-version>3.1.0.RELEASE</org.springframework.security-version>
+		<org.springframework.security-version>5.5.7</org.springframework.security-version>
 		<org.springframework.security.oauth-version>1.0.0.RC2</org.springframework.security.oauth-version>
 		<org.springframework.integration-version>2.1.3.RELEASE</org.springframework.integration-version>
 		<org.springframework.social-version>1.0.2.RELEASE</org.springframework.social-version>
@@ -541,22 +541,11 @@
 						</goals>
 						<configuration>
 							<tasks>
-								<scp
-									file="${project.build.directory}/${project.build.finalName}.${project.packaging}"
-									todir="${publish.username}@${publish.host}:/tmp/greenhouse.war"
-									keyfile="${publish.keyfile}" trust="true" />
-								<sshexec host="${publish.host}" username="${publish.username}"
-									command="${publish.serverPath}/bin/tcruntime-ctl.sh stop"
-									keyfile="${publish.keyfile}" trust="true" failonerror="false" />
-								<sshexec host="${publish.host}" username="${publish.username}"
-									command="rm -rf ${publish.serverPath}/webapps/*" keyfile="${publish.keyfile}"
-									trust="true" />
-								<sshexec host="${publish.host}" username="${publish.username}"
-									command="mv /tmp/greenhouse.war ${publish.serverPath}/webapps/ROOT.war"
-									keyfile="${publish.keyfile}" trust="true" />
-								<sshexec host="${publish.host}" username="${publish.username}"
-									command="${publish.serverPath}/bin/tcruntime-ctl.sh start"
-									keyfile="${publish.keyfile}" trust="true" />
+								<scp file="${project.build.directory}/${project.build.finalName}.${project.packaging}" todir="${publish.username}@${publish.host}:/tmp/greenhouse.war" keyfile="${publish.keyfile}" trust="true"/>
+								<sshexec host="${publish.host}" username="${publish.username}" command="${publish.serverPath}/bin/tcruntime-ctl.sh stop" keyfile="${publish.keyfile}" trust="true" failonerror="false"/>
+								<sshexec host="${publish.host}" username="${publish.username}" command="rm -rf ${publish.serverPath}/webapps/*" keyfile="${publish.keyfile}" trust="true"/>
+								<sshexec host="${publish.host}" username="${publish.username}" command="mv /tmp/greenhouse.war ${publish.serverPath}/webapps/ROOT.war" keyfile="${publish.keyfile}" trust="true"/>
+								<sshexec host="${publish.host}" username="${publish.username}" command="${publish.serverPath}/bin/tcruntime-ctl.sh start" keyfile="${publish.keyfile}" trust="true"/>
 							</tasks>
 						</configuration>
 					</execution>
@@ -610,7 +599,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<execute></execute>
+										<execute/>
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
