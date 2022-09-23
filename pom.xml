@@ -16,16 +16,16 @@
 	<version>1.0.0.BUILD-SNAPSHOT</version>
 	<properties>
 		<java-version>1.6</java-version>
-		<org.springframework-version>3.1.2.RELEASE</org.springframework-version>
+		<org.springframework-version>5.2.22.RELEASE</org.springframework-version>
 		<org.springframework.test-mvc-version>1.0.0.M1</org.springframework.test-mvc-version>
-		<org.springframework.security-version>3.1.0.RELEASE</org.springframework.security-version>
-		<org.springframework.security.oauth-version>1.0.0.RC2</org.springframework.security.oauth-version>
-		<org.springframework.integration-version>2.1.3.RELEASE</org.springframework.integration-version>
-		<org.springframework.social-version>1.0.2.RELEASE</org.springframework.social-version>
-		<org.springframework.social.facebook-version>1.0.1.RELEASE</org.springframework.social.facebook-version>
+		<org.springframework.security-version>5.5.7</org.springframework.security-version>
+		<org.springframework.security.oauth-version>2.5.2.RELEASE</org.springframework.security.oauth-version>
+		<org.springframework.integration-version>4.3.15.RELEASE</org.springframework.integration-version>
+		<org.springframework.social-version>1.1.3.RELEASE</org.springframework.social-version>
+		<org.springframework.social.facebook-version>2.0.0.RELEASE</org.springframework.social.facebook-version>
 		<org.springframework.social.linkedin-version>1.0.0.RC1</org.springframework.social.linkedin-version>
 		<org.springframework.social.tripit-version>1.0.0.M3</org.springframework.social.tripit-version>
-		<org.springframework.mobile-version>1.0.0.RELEASE</org.springframework.mobile-version>
+		<org.springframework.mobile-version>1.1.1.RELEASE</org.springframework.mobile-version>
 		<org.aspectj-version>1.6.11</org.aspectj-version>
 		<org.slf4j-version>1.6.2</org.slf4j-version>
 	</properties>
@@ -200,20 +200,20 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<version>1.3.160</version>
+			<version>2.1.210</version>
 		</dependency>
 		<!-- For MapMaker -->
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>10.0.1</version>
+			<version>30.0-android</version>
 		</dependency>
 
 		<!-- Apache Http Client -->
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			<version>4.1.2</version>
+			<version>4.5.13</version>
 			<exclusions>
 				<exclusion>
 					<groupId>commons-logging</groupId>
@@ -281,7 +281,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>4.2.0.Final</version>
+			<version>6.0.23.Final</version>
 		</dependency>
 
 		<!-- Joda Time -->
@@ -308,12 +308,12 @@
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
-			<version>1.2.2</version>
+			<version>1.3.3</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>1.4</version>
+			<version>2.7</version>
 		</dependency>
 
 		<!-- S3 -->
@@ -322,7 +322,7 @@
 			<artifactId>jets3t</artifactId>
 			<!-- The next release of jets3t should have support for HttpComponents 
 				4.1 and HttpClient 3.1 will be removed from the classpath -->
-			<version>0.8.1</version>
+			<version>0.9.4</version>
 			<exclusions>
 				<!-- Exclude Commons Logging in favor of SLF4j -->
 				<exclusion>
@@ -541,22 +541,11 @@
 						</goals>
 						<configuration>
 							<tasks>
-								<scp
-									file="${project.build.directory}/${project.build.finalName}.${project.packaging}"
-									todir="${publish.username}@${publish.host}:/tmp/greenhouse.war"
-									keyfile="${publish.keyfile}" trust="true" />
-								<sshexec host="${publish.host}" username="${publish.username}"
-									command="${publish.serverPath}/bin/tcruntime-ctl.sh stop"
-									keyfile="${publish.keyfile}" trust="true" failonerror="false" />
-								<sshexec host="${publish.host}" username="${publish.username}"
-									command="rm -rf ${publish.serverPath}/webapps/*" keyfile="${publish.keyfile}"
-									trust="true" />
-								<sshexec host="${publish.host}" username="${publish.username}"
-									command="mv /tmp/greenhouse.war ${publish.serverPath}/webapps/ROOT.war"
-									keyfile="${publish.keyfile}" trust="true" />
-								<sshexec host="${publish.host}" username="${publish.username}"
-									command="${publish.serverPath}/bin/tcruntime-ctl.sh start"
-									keyfile="${publish.keyfile}" trust="true" />
+								<scp file="${project.build.directory}/${project.build.finalName}.${project.packaging}" todir="${publish.username}@${publish.host}:/tmp/greenhouse.war" keyfile="${publish.keyfile}" trust="true"/>
+								<sshexec host="${publish.host}" username="${publish.username}" command="${publish.serverPath}/bin/tcruntime-ctl.sh stop" keyfile="${publish.keyfile}" trust="true" failonerror="false"/>
+								<sshexec host="${publish.host}" username="${publish.username}" command="rm -rf ${publish.serverPath}/webapps/*" keyfile="${publish.keyfile}" trust="true"/>
+								<sshexec host="${publish.host}" username="${publish.username}" command="mv /tmp/greenhouse.war ${publish.serverPath}/webapps/ROOT.war" keyfile="${publish.keyfile}" trust="true"/>
+								<sshexec host="${publish.host}" username="${publish.username}" command="${publish.serverPath}/bin/tcruntime-ctl.sh start" keyfile="${publish.keyfile}" trust="true"/>
 							</tasks>
 						</configuration>
 					</execution>
@@ -610,7 +599,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<execute></execute>
+										<execute/>
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
